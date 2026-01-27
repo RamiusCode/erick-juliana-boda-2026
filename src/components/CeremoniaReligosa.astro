@@ -1,0 +1,216 @@
+---
+// CeremoniaReligiosa.astro
+---
+
+<section class="relative w-full py-8 px-6" id="seccion-ceremonia">
+    <div class="max-w-md mx-auto text-center" id="contenedor-ceremonia">
+        <!-- Icono de iglesia -->
+        <div class="flex justify-center mb-6 icono-ceremonia opacity-0">
+            <div class="w-16 h-16 md:w-20 md:h-20">
+                <img
+                    src="/iconos/iglesia.png"
+                    alt="Iglesia"
+                    class="w-full h-full object-contain filter-color"
+                />
+            </div>
+        </div>
+
+        <!-- Título -->
+        <h3
+            class="font-crimson text-xl md:text-2xl uppercase mb-4 titulo-ceremonia opacity-0"
+            style="color: #8d9072; font-weight: 300;"
+        >
+            Ceremonia Religiosa
+        </h3>
+
+        <!-- Nombre de la iglesia -->
+        <p
+            class="font-crimson text-lg md:text-base mb-2 iglesia-nombre opacity-0"
+            style="color: #8d9072; font-weight: 400;"
+        >
+            Iglesia Sagrada Familia
+        </p>
+
+        <!-- Hora -->
+        <p
+            class="font-crimson text-lg md:text-lg mb-6 hora-ceremonia opacity-0"
+            style="color: #8d9072; font-weight: 300;"
+        >
+            14:00 Hrs.
+        </p>
+
+        <!-- Botón de ubicación estilo portada -->
+        <div class="flex justify-center px-4 boton-ubicacion opacity-0">
+            <a
+                href="#"
+                class="w-full max-w-[280px] px-8 py-3 bg-[#f3f0e8] border
+            border-[#dcd9d0] rounded-full text-[#5a5a5a] font-serif text-[13px]
+            uppercase tracking-[0.15em] shadow-sm transition-all duration-300
+            hover:bg-[#ebe8df] active:scale-95 cursor-pointer inline-block
+            text-center no-underline"
+            >
+                Ver Ubicación
+            </a>
+        </div>
+    </div>
+
+    <style>
+        .font-crimson {
+            font-family: "Crimson Text", serif;
+        }
+
+        .font-serif {
+            font-family: "Cormorant", serif;
+        }
+
+        .filter-color {
+            filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+                saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+                drop-shadow(0 2px 8px rgba(141, 144, 114, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .icono-ceremonia:hover .filter-color {
+            filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+                saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+                drop-shadow(0 4px 12px rgba(141, 144, 114, 0.3));
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+    <script>
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const initCeremonia = () => {
+            console.log("⛪ Iniciando animaciones de ceremonia religiosa...");
+
+            // Estado inicial con selectores más específicos
+            gsap.set("#contenedor-ceremonia .icono-ceremonia", {
+                opacity: 0,
+                y: -30,
+                scale: 0.8,
+            });
+            gsap.set("#contenedor-ceremonia .titulo-ceremonia", {
+                opacity: 0,
+                y: 20,
+            });
+            gsap.set("#contenedor-ceremonia .iglesia-nombre", {
+                opacity: 0,
+                y: 20,
+            });
+            gsap.set("#contenedor-ceremonia .hora-ceremonia", {
+                opacity: 0,
+                y: 20,
+            });
+            gsap.set("#contenedor-ceremonia .boton-ubicacion", {
+                opacity: 0,
+                y: 20,
+            });
+
+            // Timeline de animación con ScrollTrigger usando ID único
+            ScrollTrigger.create({
+                trigger: "#seccion-ceremonia",
+                start: "top 75%",
+                end: "bottom 25%",
+
+                onEnter: () => {
+                    console.log("⛪ Entrando a la sección de ceremonia");
+                    // Animación de entrada elegante y simultánea
+                    gsap.to("#contenedor-ceremonia .icono-ceremonia", {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                    });
+
+                    gsap.to("#contenedor-ceremonia .titulo-ceremonia", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power3.out",
+                        delay: 0.1,
+                    });
+
+                    gsap.to("#contenedor-ceremonia .iglesia-nombre", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power3.out",
+                        delay: 0.15,
+                    });
+
+                    gsap.to("#contenedor-ceremonia .hora-ceremonia", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power3.out",
+                        delay: 0.2,
+                    });
+
+                    gsap.to("#contenedor-ceremonia .boton-ubicacion", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power3.out",
+                        delay: 0.25,
+                    });
+                },
+
+                onLeaveBack: () => {
+                    console.log("⛪ Saliendo de la sección de ceremonia");
+                    // Animación de salida rápida y simultánea
+                    gsap.to("#contenedor-ceremonia .icono-ceremonia", {
+                        opacity: 0,
+                        y: -30,
+                        scale: 0.8,
+                        duration: 0.4,
+                        ease: "power2.in",
+                    });
+                    gsap.to("#contenedor-ceremonia .titulo-ceremonia", {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.4,
+                        ease: "power2.in",
+                    });
+                    gsap.to("#contenedor-ceremonia .iglesia-nombre", {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.4,
+                        ease: "power2.in",
+                    });
+                    gsap.to("#contenedor-ceremonia .hora-ceremonia", {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.4,
+                        ease: "power2.in",
+                    });
+                    gsap.to("#contenedor-ceremonia .boton-ubicacion", {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.4,
+                        ease: "power2.in",
+                    });
+                },
+            });
+
+            console.log("⛪✨ Animaciones de ceremonia activadas!");
+        };
+
+        // Ejecutar cuando el DOM esté listo
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initCeremonia);
+        } else {
+            initCeremonia();
+        }
+
+        // También ejecutar en Astro page load
+        document.addEventListener("astro:page-load", initCeremonia);
+    </script>
+</section>

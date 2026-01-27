@@ -1,0 +1,146 @@
+---
+// src/components/HeroPortadaSimple.astro
+const NOMBRE_1 = "Daniel";
+const NOMBRE_2 = "Melany";
+---
+
+<section
+  class="relative w-full bg-[#faf9f6] overflow-hidden flex flex-col items-center"
+>
+  <div class="flex justify-center pt-4 pb-2 animate-[fade-in_1.5s_ease-out]">
+    <img
+      src="/imagenes/iniciales.png"
+      alt="Iniciales"
+      class="w-24 h-auto md:w-40 object-contain"
+    />
+  </div>
+
+  <div class="w-full leading-[0]">
+    <img
+      src="/imagenes/imageportada.webp"
+      alt={`${NOMBRE_1} y ${NOMBRE_2}`}
+      class="w-full h-auto block"
+    />
+  </div>
+
+  <div class="fixed bottom-6 right-6 z-[9999]" id="boton-musica-flotante">
+    <button
+      id="toggle-musica-global"
+      class="group relative w-14 h-14 bg-white/80 hover:bg-white/90 backdrop-blur-md rounded-full shadow-lg hover:shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 border border-white/40"
+      aria-label="Controlar música"
+    >
+      <div
+        class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+      >
+      </div>
+
+      <svg
+        id="icono-pause-global"
+        class="w-6 h-6 text-[#0a285e] relative z-10 transition-all duration-100"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M5.5 3.5A1.5 1.5 0 017 2h1a1.5 1.5 0 011.5 1.5v13A1.5 1.5 0 018 18H7a1.5 1.5 0 01-1.5-1.5v-13zm7 0A1.5 1.5 0 0114 2h1a1.5 1.5 0 011.5 1.5v13a1.5 1.5 0 01-1.5 1.5h-1a1.5 1.5 0 01-1.5-1.5v-13z"
+        ></path>
+      </svg>
+
+      <svg
+        id="icono-play-global"
+        class="w-6 h-6 text-[#0a285e] hidden relative z-10 transition-all duration-100"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
+        ></path>
+      </svg>
+
+      <div
+        class="absolute -inset-2 rounded-full border-2 border-white/40 animate-ping-slow"
+        id="onda-sonido"
+      >
+      </div>
+    </button>
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ping-slow {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    75%,
+    100% {
+      transform: scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  .animate-ping-slow {
+    animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  #boton-musica-flotante button {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  // --- LÓGICA MÚSICA ---
+  document.addEventListener("DOMContentLoaded", () => {
+    const botonToggle = document.getElementById("toggle-musica-global");
+    const iconoPlay = document.getElementById("icono-play-global");
+    const iconoPause = document.getElementById("icono-pause-global");
+    const ondaSonido = document.getElementById("onda-sonido");
+
+    gsap.fromTo(
+      "#boton-musica-flotante",
+      { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)", delay: 1 },
+    );
+
+    botonToggle?.addEventListener("click", () => {
+      const audioActual = (window as any).audioGlobal;
+      const estadoActual = (window as any).estaReproduciendoGlobal;
+
+      if (estadoActual && audioActual) {
+        audioActual.pause();
+        (window as any).estaReproduciendoGlobal = false;
+        iconoPause?.classList.add("hidden");
+        iconoPlay?.classList.remove("hidden");
+        ondaSonido?.classList.add("hidden");
+      } else if (audioActual) {
+        audioActual.play();
+        (window as any).estaReproduciendoGlobal = true;
+        iconoPlay?.classList.add("hidden");
+        iconoPause?.classList.remove("hidden");
+        ondaSonido?.classList.remove("hidden");
+      }
+    });
+  });
+</script>

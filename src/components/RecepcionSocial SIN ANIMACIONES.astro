@@ -1,0 +1,167 @@
+---
+// RecepcionSocial.astro
+---
+
+<section class="relative w-full py-8 px-6">
+    <div class="max-w-md mx-auto text-center">
+        <!-- Icono de recepción -->
+        <div class="flex justify-center mb-6 icono-recepcion opacity-0">
+            <div class="w-16 h-16 md:w-20 md:h-20">
+                <img
+                    src="/iconos/recepcion.png"
+                    alt="Recepción"
+                    class="w-full h-full object-contain filter-color"
+                />
+            </div>
+        </div>
+
+        <!-- Título -->
+        <h3
+            class="font-crimson text-xl md:text-2xl uppercase tracking-widest mb-4 titulo-recepcion opacity-0"
+            style="color: #8d9072; font-weight: 300; letter-spacing: 0.2em;"
+        >
+            Recepción Social
+        </h3>
+
+        <!-- Nombre del lugar -->
+        <p
+            class="font-crimson text-lg md:text-base mb-2 lugar-nombre opacity-0"
+            style="color: #8d9072; font-weight: 400;"
+        >
+            Salón de Eventos Las Rosas
+        </p>
+
+        <!-- Hora -->
+        <p
+            class="font-crimson text-lg md:text-lg mb-6 hora-recepcion opacity-0"
+            style="color: #8d9072; font-weight: 300;"
+        >
+            18:30 H
+        </p>
+
+        <!-- Botón de ubicación estilo portada -->
+        <div class="flex justify-center px-4 boton-ubicacion opacity-0">
+            <a
+                href="#"
+                class="w-full max-w-[280px] px-8 py-3 bg-[#f3f0e8] border border-[#dcd9d0] rounded-full text-[#5a5a5a] font-serif text-[13px] uppercase tracking-[0.15em] shadow-sm transition-all duration-300 hover:bg-[#ebe8df] active:scale-95 cursor-pointer inline-block text-center no-underline"
+            >
+                Ver Ubicación
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .font-crimson {
+        font-family: "Crimson Text", serif;
+    }
+
+    .font-serif {
+        font-family: "Cormorant", serif;
+    }
+
+    .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 2px 8px rgba(141, 144, 114, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .icono-recepcion:hover .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 4px 12px rgba(141, 144, 114, 0.3));
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initRecepcion = () => {
+        console.log("🥂 Iniciando animaciones de recepción social...");
+
+        // Estado inicial
+        gsap.set(".icono-recepcion", { opacity: 0, y: -30, scale: 0.8 });
+        gsap.set(".titulo-recepcion", { opacity: 0, y: 20 });
+        gsap.set(".lugar-nombre", { opacity: 0, y: 20 });
+        gsap.set(".hora-recepcion", { opacity: 0, y: 20 });
+        gsap.set(".boton-ubicacion", { opacity: 0, y: 20 });
+
+        // Timeline de animación
+        ScrollTrigger.create({
+            trigger: "section",
+            start: "top 75%",
+            once: true,
+            onEnter: () => {
+                const tl = gsap.timeline();
+
+                tl.to(".icono-recepcion", {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "back.out(1.5)",
+                })
+                    .to(
+                        ".titulo-recepcion",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        },
+                        0.3,
+                    )
+                    .to(
+                        ".lugar-nombre",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        },
+                        0.5,
+                    )
+                    .to(
+                        ".hora-recepcion",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        },
+                        0.7,
+                    )
+                    .to(
+                        ".boton-ubicacion",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        },
+                        0.9,
+                    );
+            },
+        });
+
+        console.log("🥂✨ Animaciones de recepción activadas!");
+    };
+
+    // Ejecutar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initRecepcion);
+    } else {
+        initRecepcion();
+    }
+
+    // También ejecutar en Astro page load
+    document.addEventListener("astro:page-load", initRecepcion);
+</script>

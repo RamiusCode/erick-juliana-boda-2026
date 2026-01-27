@@ -1,0 +1,161 @@
+---
+// CodigoVestimenta.astro
+---
+
+<section class="relative w-full py-8 px-6" id="seccion-vestimenta">
+    <div class="max-w-md mx-auto text-center" id="contenedor-vestimenta">
+        <!-- Iconos de vestimenta -->
+        <div
+            class="flex justify-center items-center gap-4 mb-6 iconos-vestimenta opacity-0"
+        >
+            <!-- Icono vestido femenino -->
+            <div class="w-12 h-12 md:w-16 md:h-16">
+                <img
+                    src="/iconos/vestido-de-novia.png"
+                    alt="Vestido"
+                    class="w-full h-full object-contain filter-color"
+                />
+            </div>
+        </div>
+
+        <!-- Título -->
+        <h3
+            class="font-crimson text-xl md:text-2xl uppercase tracking-widest mb-2 titulo-vestimenta opacity-0"
+            style="color: #8d9072; font-weight: 300;"
+        >
+            Código de Vestimenta
+        </h3>
+
+        <!-- Descripción -->
+        <p
+            class="font-crimson text-lg md:text-base descripcion-vestimenta opacity-0"
+            style="color: #8d9072; font-weight: 400;"
+        >
+            Gala
+        </p>
+    </div>
+</section>
+
+<style>
+    .font-crimson {
+        font-family: "Crimson Text", serif;
+    }
+
+    .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 2px 8px rgba(141, 144, 114, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .iconos-vestimenta:hover .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 4px 12px rgba(141, 144, 114, 0.3));
+    }
+
+    .iconos-vestimenta img {
+        transition: transform 0.3s ease;
+    }
+
+    .iconos-vestimenta:hover img {
+        transform: scale(1.1);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initVestimenta = () => {
+        console.log("👔 Iniciando animaciones de código de vestimenta...");
+
+        // Estado inicial con selectores específicos
+        gsap.set("#contenedor-vestimenta .iconos-vestimenta", {
+            opacity: 0,
+            y: -30,
+            scale: 0.8,
+        });
+        gsap.set("#contenedor-vestimenta .titulo-vestimenta", {
+            opacity: 0,
+            y: 20,
+        });
+        gsap.set("#contenedor-vestimenta .descripcion-vestimenta", {
+            opacity: 0,
+            y: 20,
+        });
+
+        // Timeline de animación con ScrollTrigger usando ID único
+        ScrollTrigger.create({
+            trigger: "#seccion-vestimenta",
+            start: "top 75%",
+            end: "bottom 25%",
+
+            onEnter: () => {
+                console.log("👔 Entrando a la sección de vestimenta");
+                // Animación de entrada elegante y simultánea
+                gsap.to("#contenedor-vestimenta .iconos-vestimenta", {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                });
+
+                gsap.to("#contenedor-vestimenta .titulo-vestimenta", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.1,
+                });
+
+                gsap.to("#contenedor-vestimenta .descripcion-vestimenta", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.15,
+                });
+            },
+
+            onLeaveBack: () => {
+                console.log("👔 Saliendo de la sección de vestimenta");
+                // Animación de salida rápida y simultánea
+                gsap.to("#contenedor-vestimenta .iconos-vestimenta", {
+                    opacity: 0,
+                    y: -30,
+                    scale: 0.8,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+                gsap.to("#contenedor-vestimenta .titulo-vestimenta", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+                gsap.to("#contenedor-vestimenta .descripcion-vestimenta", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+            },
+        });
+
+        console.log("👔✨ Animaciones de vestimenta activadas!");
+    };
+
+    // Ejecutar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initVestimenta);
+    } else {
+        initVestimenta();
+    }
+
+    // También ejecutar en Astro page load
+    document.addEventListener("astro:page-load", initVestimenta);
+</script>

@@ -1,0 +1,192 @@
+---
+// src/layouts/Layout.astro
+import "../styles/global.css";
+export interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="m-0 p-0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <link rel="icon" type="image/png" href="/iconos/Anillos.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Forzar modo claro y evitar dark mode del navegador */
+      html {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        color-scheme: light only;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: url("/imagenes/BlancoTextura2333.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color-scheme: light only;
+        background-color: #ffffff;
+        position: relative;
+      }
+
+      main {
+        background: transparent !important;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Contenedor de hojas de fondo */
+      .hojas-fondo {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen m-0 p-0">
+    <!-- Hojas de fondo flotantes con el mismo efecto de la portada -->
+    <div class="hojas-fondo">
+      <!-- Hoja 1: Grande superior izquierda -->
+      <div
+        id="hoja-bg-1"
+        class="absolute -top-10 -left-2 w-48 h-48 opacity-10 z-0"
+      >
+        <img
+          src="/imagenes/hojagrande.png"
+          alt=""
+          class="w-full h-full object-contain"
+        />
+      </div>
+
+      <!-- Hoja 2: Pequeña izquierda -->
+      <div
+        id="hoja-bg-2"
+        class="absolute top-120 left-0 w-20 h-28 opacity-10 z-0"
+      >
+        <img
+          src="/imagenes/hojapequeno.png"
+          alt=""
+          class="w-full h-full object-contain"
+        />
+      </div>
+
+      <!-- Hoja 3: Pequeña derecha superior -->
+      <div
+        id="hoja-bg-3"
+        class="absolute top-30 right-0 w-20 h-28 opacity-10 z-0"
+      >
+        <img
+          src="/imagenes/hojapequeno.png"
+          alt=""
+          class="w-full h-full object-contain scale-x-[-1]"
+        />
+      </div>
+
+      <!-- Hoja 4: Grande derecha -->
+      <div
+        id="hoja-bg-4"
+        class="absolute top-85 -right-2 w-48 h-48 opacity-10 z-0"
+      >
+        <img
+          src="/imagenes/hojagrande.png"
+          alt=""
+          class="w-full h-full object-contain scale-x-[-1]"
+        />
+      </div>
+    </div>
+
+    <main class="m-0 p-0 overflow-x-hidden">
+      <slot />
+    </main>
+
+    <!-- Script para animación de hojas - EXACTAMENTE IGUAL A LA PORTADA -->
+    <script>
+      import { gsap } from "gsap";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- ANIMACIÓN DE LEVITACIÓN EXACTA DE LA PORTADA ---
+        gsap.to("#hoja-bg-1", {
+          y: -15,
+          x: -8,
+          rotation: -5,
+          duration: 5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        gsap.to("#hoja-bg-2", {
+          y: 12,
+          x: 5,
+          rotation: 8,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 0.5,
+        });
+
+        gsap.to("#hoja-bg-3", {
+          y: -10,
+          x: 10,
+          rotation: 6,
+          duration: 4.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 1,
+        });
+
+        gsap.to("#hoja-bg-4", {
+          y: 18,
+          rotation: -7,
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      });
+    </script>
+  </body>
+</html>

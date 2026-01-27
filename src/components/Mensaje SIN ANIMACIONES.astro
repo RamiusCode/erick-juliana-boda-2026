@@ -1,0 +1,108 @@
+---
+// MensajePuntualidad.astro - Mensaje simple con ícono de pareja
+---
+
+<section class="relative w-full py-8 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+        <!-- Ícono de pareja -->
+        <div class="flex justify-center mb-4 icono-pareja opacity-0">
+            <div class="w-16 h-16 md:w-20 md:h-20">
+                <img
+                    src="/iconos/esposo-y-esposa.png"
+                    alt="Pareja"
+                    class="w-full h-full object-contain filter-color"
+                />
+            </div>
+        </div>
+
+        <!-- Texto del mensaje -->
+        <div class="texto-mensaje opacity-0 space-y-2">
+            <p
+                class="font-crimson text-lg md:text-lg leading-relaxed"
+                style="color: #8d9072; font-weight: 300;"
+            >
+                La ceremonia comenzará puntualmente, y queremos que disfrutes
+                con nosotros de cada detalle.
+            </p>
+            <p
+                class="font-crimson text-lg md:text-lg leading-relaxed"
+                style="color: #8d9072; font-weight: 400;"
+            >
+                ¡Te agradeceríamos que llegues a tiempo!
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .font-crimson {
+        font-family: "Crimson Text", serif;
+    }
+
+    .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 2px 8px rgba(141, 144, 114, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .icono-pareja:hover .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 4px 12px rgba(141, 144, 114, 0.3));
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initMensaje = () => {
+        console.log("💑 Iniciando animaciones del mensaje...");
+
+        // Estado inicial
+        gsap.set(".icono-pareja", { opacity: 0, y: -30, scale: 0.8 });
+        gsap.set(".texto-mensaje", { opacity: 0, y: 20 });
+
+        // Timeline de animación
+        ScrollTrigger.create({
+            trigger: "section",
+            start: "top 75%",
+            once: true,
+            onEnter: () => {
+                const tl = gsap.timeline();
+
+                tl.to(".icono-pareja", {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "back.out(1.5)",
+                }).to(
+                    ".texto-mensaje",
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    },
+                    0.3,
+                );
+            },
+        });
+
+        console.log("💑✨ Animaciones del mensaje activadas!");
+    };
+
+    // Ejecutar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initMensaje);
+    } else {
+        initMensaje();
+    }
+
+    // También ejecutar en Astro page load
+    document.addEventListener("astro:page-load", initMensaje);
+</script>

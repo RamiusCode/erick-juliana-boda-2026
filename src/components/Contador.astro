@@ -1,0 +1,277 @@
+---
+// ContadorRegresivo.astro
+---
+
+<section class="relative w-full py-12 px-6 overflow-hidden">
+    <div class="max-w-md mx-auto relative z-10" id="contenedor-contador">
+        <!-- Texto superior -->
+        <p
+            class="text-center text-base md:text-xs uppercase mb-2 font-crimson font-light"
+            style="color: #8d9072;"
+            id="texto-superior"
+        >
+            Queremos que nos acompañes en<br />
+            nuestro gran día:
+        </p>
+
+        <!-- Fecha del evento -->
+        <p
+            class="text-center text-base md:text-base uppercase mb-6 font-crimson font-light"
+            style="color: #00000;"
+            id="fecha-evento"
+        >
+            Sábado 18 de Abril 2026
+        </p>
+
+        <!-- Etiqueta "Faltan" -->
+        <div class="text-center mb-4" id="texto-faltan">
+            <p
+                class="text-base md:text-sm uppercase font-crimson font-light"
+                style="color: #8d9072;"
+            >
+                Faltan
+            </p>
+        </div>
+
+        <!-- Card del contador con borde -->
+        <div
+            class="bg-[#00000] backdrop-blur-sm border-1 rounded-2xl py-6 px-6 shadow-sm"
+            style="border-color: #000000;"
+            id="card-contador"
+        >
+            <div class="grid grid-cols-4 gap-3">
+                <!-- DÍAS -->
+                <div class="text-center">
+                    <p
+                        id="dias"
+                        class="font-crimson text-3xl md:text-4xl font-light mb-1"
+                        style="color: #8d9072;"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase"
+                        style="color: #8d9072;"
+                    >
+                        Días
+                    </p>
+                </div>
+
+                <!-- HORAS -->
+                <div class="text-center">
+                    <p
+                        id="horas"
+                        class="font-crimson text-3xl md:text-4xl font-light mb-1"
+                        style="color: #8d9072;"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase"
+                        style="color: #8d9072;"
+                    >
+                        Hrs
+                    </p>
+                </div>
+
+                <!-- MINUTOS -->
+                <div class="text-center">
+                    <p
+                        id="minutos"
+                        class="font-crimson text-3xl md:text-4xl font-light mb-1"
+                        style="color: #8d9072;"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase"
+                        style="color: #8d9072;"
+                    >
+                        Mins
+                    </p>
+                </div>
+
+                <!-- SEGUNDOS -->
+                <div class="text-center">
+                    <p
+                        id="segundos"
+                        class="font-crimson text-3xl md:text-4xl font-light mb-1"
+                        style="color: #8d9072;"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase"
+                        style="color: #8d9072;"
+                    >
+                        Segs
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 🎬 ANIMACIONES CON GSAP Y CUENTA REGRESIVA                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ═══ CONFIGURACIÓN DE LA FECHA ═══
+    const FECHA_EVENTO = {
+        año: 2026,
+        mes: 4, // Abril
+        dia: 18,
+        hora: 16,
+        minuto: 0,
+    };
+
+    const initContador = () => {
+        console.log("⏰ Iniciando contador regresivo...");
+
+        // ═══ ESTADO INICIAL ═══
+        gsap.set("#contenedor-contador", { opacity: 0, y: 50 });
+
+        // ═══ ANIMACIÓN DE ENTRADA ═══
+        ScrollTrigger.create({
+            trigger: "#contenedor-contador",
+            start: "top 90%",
+            end: "top 20%",
+
+            onEnter: () => {
+                const tl = gsap.timeline();
+
+                tl.to("#contenedor-contador", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                })
+                    .to(
+                        "#texto-superior",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out",
+                        },
+                        0.3,
+                    )
+                    .to(
+                        "#fecha-evento",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out",
+                        },
+                        0.5,
+                    )
+                    .to(
+                        "#texto-faltan",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out",
+                        },
+                        0.7,
+                    )
+                    .to(
+                        "#card-contador",
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 1,
+                            ease: "back.out(1.2)",
+                        },
+                        0.9,
+                    );
+            },
+
+            onLeaveBack: () => {
+                gsap.to("#contenedor-contador", {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5,
+                    ease: "power2.in",
+                });
+            },
+        });
+
+        // ═══ CUENTA REGRESIVA ═══
+        const fechaBoda = new Date(
+            FECHA_EVENTO.año,
+            FECHA_EVENTO.mes - 1,
+            FECHA_EVENTO.dia,
+            FECHA_EVENTO.hora,
+            FECHA_EVENTO.minuto,
+            0,
+        ).getTime();
+
+        console.log("📅 Fecha del evento:", new Date(fechaBoda));
+
+        function actualizarCuentaRegresiva() {
+            const ahora = new Date().getTime();
+            const diferencia = fechaBoda - ahora;
+
+            if (diferencia > 0) {
+                const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                const horas = Math.floor(
+                    (diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+                );
+                const minutos = Math.floor(
+                    (diferencia % (1000 * 60 * 60)) / (1000 * 60),
+                );
+                const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+                const diasEl = document.getElementById("dias");
+                const horasEl = document.getElementById("horas");
+                const minutosEl = document.getElementById("minutos");
+                const segundosEl = document.getElementById("segundos");
+
+                if (diasEl)
+                    diasEl.textContent = dias.toString().padStart(2, "0");
+                if (horasEl)
+                    horasEl.textContent = horas.toString().padStart(2, "0");
+                if (minutosEl)
+                    minutosEl.textContent = minutos.toString().padStart(2, "0");
+                if (segundosEl)
+                    segundosEl.textContent = segundos
+                        .toString()
+                        .padStart(2, "0");
+            } else {
+                // Cuando llegue la fecha
+                const diasEl = document.getElementById("dias");
+                const horasEl = document.getElementById("horas");
+                const minutosEl = document.getElementById("minutos");
+                const segundosEl = document.getElementById("segundos");
+
+                if (diasEl) diasEl.textContent = "00";
+                if (horasEl) horasEl.textContent = "00";
+                if (minutosEl) minutosEl.textContent = "00";
+                if (segundosEl) segundosEl.textContent = "00";
+            }
+        }
+
+        // Actualizar cada segundo
+        actualizarCuentaRegresiva();
+        setInterval(actualizarCuentaRegresiva, 1000);
+
+        console.log("⏰✨ Contador regresivo activado!");
+    };
+
+    // Ejecutar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initContador);
+    } else {
+        initContador();
+    }
+
+    // También ejecutar en Astro page load
+    document.addEventListener("astro:page-load", initContador);
+</script>

@@ -1,0 +1,106 @@
+---
+// ContadorRegresivo.astro - Contenedor principal con efecto glassmorphism
+import Contador from "./Contador.astro";
+import Itinerario from "./Itinerario.astro";
+import CeremoniaReligosa from "./CeremoniaReligosa.astro";
+import RecepcionSocial from "./RecepcionSocial.astro";
+import CodigoVestimenta from "./CodigoVestimenta.astro";
+---
+
+<section class="relative w-full py-12 px-6">
+    <div class="max-w-6xl mx-auto relative z-10" id="contenedor-principal">
+        <!-- MARCO PRINCIPAL CON EFECTO GLASSMORPHISM -->
+        <div
+            class="rounded-3xl border-2 border-[#0a285e]/25 p-2 md:p-12 shadow-lg relative overflow-hidden"
+        >
+            <!-- Brillo sutil animado en las esquinas -->
+            <div
+                class="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-[#0a285e]/10 to-transparent rounded-full blur-3xl animate-pulse-slow"
+            >
+            </div>
+            <div
+                class="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-tr from-[#0a285e]/8 to-transparent rounded-full blur-3xl animate-pulse-slow"
+                style="animation-delay: 1s;"
+            >
+            </div>
+
+            <!-- CONTENIDO - Todos los componentes dentro del card -->
+            <div class="relative z-10 space-y-8">
+                <Contador />
+                <Itinerario />
+                <CeremoniaReligosa />
+                <RecepcionSocial />
+                <CodigoVestimenta />
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Animación de pulso lento */
+    @keyframes pulse-slow {
+        0%,
+        100% {
+            opacity: 0.4;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.6;
+            transform: scale(1.05);
+        }
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 4s ease-in-out infinite;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initContenedor = () => {
+        console.log("🎯 Iniciando contenedor principal...");
+
+        // Estado inicial
+        gsap.set("#contenedor-principal", {
+            opacity: 0,
+            y: 50,
+            scale: 0.95,
+        });
+
+        // Animación de entrada
+        ScrollTrigger.create({
+            trigger: "#contenedor-principal",
+            start: "top 75%",
+            end: "top 20%",
+
+            onEnter: () => {
+                gsap.to("#contenedor-principal", {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1.2,
+                    ease: "power3.out",
+                });
+            },
+
+            onLeaveBack: () => {
+                gsap.to("#contenedor-principal", {
+                    opacity: 0,
+                    y: 50,
+                    scale: 0.95,
+                    duration: 0.5,
+                    ease: "power2.in",
+                });
+            },
+        });
+
+        console.log("✅ Contenedor principal listo!");
+    };
+
+    document.addEventListener("DOMContentLoaded", initContenedor);
+    document.addEventListener("astro:page-load", initContenedor);
+</script>

@@ -1,0 +1,177 @@
+---
+// HeroNames.astro
+---
+
+<section class="relative w-full py-4 px-2 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10" id="contenedor-nombres">
+        <!-- Dedicatoria - Primer párrafo -->
+        <p
+            class="text-[11px] md:text-xs uppercase mb-8 leading-[1.8] px-4 text-center opacity-0"
+            style="color: #8d9072; font-family: 'Cormorant Garamond', serif; "
+            id="parrafo-1"
+        >
+            CON ALEGRÍA Y AMOR DESEAMOS COMPARTIR CON USTEDES UN DÍA MUY
+            ESPECIAL EN NUESTRAS VIDAS: ¡NOS CASAMOS!
+        </p>
+
+        <!-- Dedicatoria - Segundo párrafo -->
+        <p
+            class="text-[11px] md:text- uppercase mb-8 leading-[1.8] px-4 text-center opacity-0"
+            style="color: #8d9072; font-family: 'Cormorant Garamond', serif; font-weight: 300;"
+            id="parrafo-2"
+        >
+            LOS INVITAMOS A ACOMPAÑARNOS MIENTRAS UNIMOS NUESTRAS VIDAS EN
+            MATRIMONIO, CELEBRANDO EL AMOR, LA FAMILIA Y LA AMISTAD QUE NOS
+            RODEA.
+        </p>
+
+        <!-- Nombre 1 -->
+        <h1
+            class="font-serif text-4xl md:text-6xl lg:text-7xl mb-2 text-center opacity-0"
+            style="color: #8d9072; font-family: 'Great Vibes', 'Allura', cursive; font-weight: 400; line-height: 1.2;"
+            id="nombre-1"
+        >
+            Juliana
+        </h1>
+
+        <!-- Símbolo & -->
+        <div
+            class="text-4xl md:text-4xl lg:text-6xl my-2 text-center opacity-0"
+            style="color: #8d9072; font-family: 'Great Vibes', 'Allura', cursive; font-weight: 400;"
+            id="ampersand"
+        >
+            &
+        </div>
+
+        <!-- Nombre 2 -->
+        <h1
+            class="font-serif text-4xl md:text-6xl lg:text-7xl mt-2 text-center opacity-0"
+            style="color: #8d9072; font-family: 'Great Vibes', 'Allura', cursive; font-weight: 400; line-height: 1.2;"
+            id="nombre-2"
+        >
+            Erick
+        </h1>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 🎨 ESTILOS PERSONALIZADOS                                   -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Allura&family=Cormorant+Garamond:wght@300;400;500&display=swap");
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 🎬 ANIMACIONES CON GSAP                                      -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initHeroNames = () => {
+        console.log("💑 Iniciando sección de nombres...");
+
+        // ═══ ESTADO INICIAL ═══
+        gsap.set("#contenedor-nombres", { opacity: 0, y: 50 });
+
+        // ═══ ANIMACIÓN PRINCIPAL ═══
+        ScrollTrigger.create({
+            trigger: "#contenedor-nombres",
+            start: "top 75%",
+            end: "top 20%",
+
+            onEnter: () => {
+                const tl = gsap.timeline();
+
+                // Contenedor aparece
+                tl.to("#contenedor-nombres", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                })
+
+                    // Párrafos aparecen
+                    .to(
+                        "#parrafo-1",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            ease: "power2.out",
+                        },
+                        0.3,
+                    )
+                    .to(
+                        "#parrafo-2",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            ease: "power2.out",
+                        },
+                        0.5,
+                    )
+
+                    // Nombres aparecen
+                    .to(
+                        "#nombre-1",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1.2,
+                            ease: "power2.out",
+                        },
+                        0.9,
+                    )
+                    .to(
+                        "#ampersand",
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.8,
+                            ease: "back.out(1.4)",
+                        },
+                        1.2,
+                    )
+                    .to(
+                        "#nombre-2",
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1.2,
+                            ease: "power2.out",
+                        },
+                        1.4,
+                    );
+            },
+
+            onLeaveBack: () => {
+                const tl = gsap.timeline();
+                tl.to(
+                    "#nombre-2, #ampersand, #nombre-1, #parrafo-2, #parrafo-1",
+                    {
+                        opacity: 0,
+                        duration: 0.3,
+                        stagger: 0.05,
+                    },
+                ).to(
+                    "#contenedor-nombres",
+                    {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.5,
+                    },
+                    "<",
+                );
+            },
+        });
+
+        console.log("💑✨ Sección de nombres activada!");
+    };
+
+    document.addEventListener("DOMContentLoaded", initHeroNames);
+    document.addEventListener("astro:page-load", initHeroNames);
+</script>

@@ -1,0 +1,184 @@
+---
+// src/components/Portada.astro - Con movimiento de hojas realista y música integrada
+---
+
+<section
+    class="fixed inset-0 w-full h-screen flex justify-center items-center z-[10000] bg-[#faf9f6]"
+    id="portada-section"
+>
+    <div class="relative w-full max-w-[480px] px-6">
+        <div
+            id="hoja-1"
+            class="absolute -top-10 -left-2 w-48 h-48 opacity-10 z-0"
+        >
+            <img
+                src="/imagenes/hojagrande.png"
+                alt=""
+                class="w-full h-full object-contain"
+            />
+        </div>
+
+        <div
+            id="hoja-2"
+            class="absolute top-120 left-0 w-20 h-28 opacity-10 z-0"
+        >
+            <img
+                src="/imagenes/hojapequeno.png"
+                alt=""
+                class="w-full h-full object-contain"
+            />
+        </div>
+
+        <div
+            id="hoja-3"
+            class="absolute top-30 right-0 w-20 h-28 opacity-10 z-0"
+        >
+            <img
+                src="/imagenes/hojapequeno.png"
+                alt=""
+                class="w-full h-full object-contain scale-x-[-1]"
+            />
+        </div>
+
+        <div
+            id="hoja-4"
+            class="absolute top-85 -right-2 w-48 h-48 opacity-10 z-0"
+        >
+            <img
+                src="/imagenes/hojagrande.png"
+                alt=""
+                class="w-full h-full object-contain scale-x-[-1]"
+            />
+        </div>
+
+        <div class="relative z-10 text-center pt-8">
+            <div class="mb-8">
+                <div class="relative">
+                    <div
+                        class="text-4xl md:text-5xl font-script text-[#8d9072] leading-none text-left ml-16"
+                    >
+                        Juliana
+                    </div>
+                    <div class="text-center my-1">
+                        <span
+                            class="text-3xl md:text-4xl text-[#8d9072] font-script inline-block"
+                            >&</span
+                        >
+                    </div>
+                    <div
+                        class="text-4xl md:text-5xl font-script text-[#8d9072] leading-none text-right mr-18"
+                    >
+                        Erick
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8 flex justify-center">
+                <div class="relative">
+                    <img
+                        src="/imagenes/sobre.webp"
+                        alt="Sobre"
+                        class="w-[280px] h-auto drop-shadow-md"
+                    />
+                </div>
+            </div>
+
+            <div class="flex justify-center px-4">
+                <button
+                    id="btn-abrir"
+                    class="w-full max-w-[280px] px-8 py-3 bg-[#f3f0e8] border border-[#dcd9d0] rounded-full text-[#5a5a5a] font-serif text-[13px] uppercase tracking-[0.15em] shadow-sm transition-all duration-300 hover:bg-[#ebe8df] active:scale-95 cursor-pointer"
+                >
+                    Ingresa a tu invitación
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant:wght@300;400;600;700&display=swap");
+    .font-script {
+        font-family: "Great Vibes", cursive;
+    }
+    .font-serif {
+        font-family: "Cormorant", serif;
+    }
+    body {
+        overflow: hidden;
+        height: 100vh;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- ANIMACIÓN DE LEVITACIÓN (DISEÑO ORIGINAL SIN TOCAR) ---
+        gsap.to("#hoja-1", {
+            y: -15,
+            x: -8,
+            rotation: -5,
+            duration: 5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+        gsap.to("#hoja-2", {
+            y: 12,
+            x: 5,
+            rotation: 8,
+            duration: 4,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 0.5,
+        });
+        gsap.to("#hoja-3", {
+            y: -10,
+            x: 10,
+            rotation: 6,
+            duration: 4.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 1,
+        });
+        gsap.to("#hoja-4", {
+            y: 18,
+            rotation: -7,
+            duration: 6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+
+        // --- MANEJO DE MÚSICA Y CIERRE ---
+        const btnAbrir = document.getElementById("btn-abrir");
+        const portadaSection = document.getElementById("portada-section");
+
+        btnAbrir?.addEventListener("click", () => {
+            // 1. Iniciar música
+            const audio = new Audio("/musica/melodia2.mp3");
+            audio.loop = true;
+            audio.volume = 0.5;
+            audio.play().catch((err) => console.log("Error audio:", err));
+
+            // 2. Guardar referencia global (opcional por si tienes controles de volumen en la otra página)
+            (window as any).audioGlobal = audio;
+            (window as any).estaReproduciendoGlobal = true;
+
+            // 3. Animación de salida
+            gsap.to(portadaSection, {
+                opacity: 0,
+                scale: 1.1,
+                duration: 0.8,
+                ease: "power2.in",
+                onComplete: () => {
+                    document.body.style.overflow = "auto";
+                    document.body.style.height = "auto";
+                    portadaSection?.remove();
+                },
+            });
+        });
+    });
+</script>

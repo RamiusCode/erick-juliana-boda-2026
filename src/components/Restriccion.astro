@@ -1,0 +1,300 @@
+---
+// SoloAdultos.astro - Versión sutil y amable
+---
+
+<section
+    class="relative w-full py-12 px-6 overflow-hidden"
+    id="seccion-adultos"
+>
+    <!-- Partículas flotantes de fondo -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+            class="particula-verde"
+            style="left: 10%; top: 20%; animation-delay: 0s;"
+        >
+        </div>
+        <div
+            class="particula-verde"
+            style="left: 85%; top: 30%; animation-delay: 1.5s;"
+        >
+        </div>
+        <div
+            class="particula-verde"
+            style="left: 15%; top: 70%; animation-delay: 3s;"
+        >
+        </div>
+        <div
+            class="particula-verde"
+            style="left: 90%; top: 65%; animation-delay: 2s;"
+        >
+        </div>
+    </div>
+
+    <div
+        class="max-w-sm lg:max-w-3xl mx-auto relative z-10"
+        id="contenedor-adultos"
+    >
+        <!-- MARCO PRINCIPAL CON EFECTO GLASSMORPHISM -->
+        <div
+            class="backdrop-blur-sm rounded-3xl border-2 border-[#8d9072]/25 p-8 shadow-sm relative overflow-hidden"
+        >
+            <!-- Brillo sutil animado en la esquina -->
+            <div
+                class="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-[#8d9072]/10 to-transparent rounded-full blur-3xl animate-pulse-slow"
+            >
+            </div>
+            <div
+                class="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-tr from-[#8d9072]/8 to-transparent rounded-full blur-3xl animate-pulse-slow"
+                style="animation-delay: 1s;"
+            >
+            </div>
+
+            <!-- CONTENIDO -->
+            <div class="text-center relative" id="tarjeta-adultos">
+                <!-- Icono de copas -->
+                <div class="flex justify-center mb-2 icono-adultos">
+                    <div class="w-16 h-16 relative adultos-icon-container">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-[#8d9072]/20 to-[#8d9072]/5 rounded-full blur-xl animate-pulse-slow"
+                        >
+                        </div>
+                        <img
+                            src="/iconos/restriccion.png"
+                            alt="Icono de copas"
+                            class="w-full h-full object-contain relative z-10 transform transition-transform duration-300 hover:scale-110 verde-filter"
+                        />
+                    </div>
+                </div>
+
+                <!-- Título principal -->
+                <h3
+                    class="font-crimson text-[#8d9072] uppercase text-xl md:text-2xl relative inline-block titulo-adultos"
+                    style="font-weight: 300;"
+                >
+                    Evento para Adultos
+                </h3>
+
+                <!-- Punto decorativo -->
+                <div class="flex justify-center mb-2 punto-adultos">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#8d9072]/40"></div>
+                </div>
+
+                <!-- Texto descriptivo amable -->
+                <p
+                    class="font-crimson text-[#8d9072] text-lg md:text-xl leading-relaxed max-w-2xl mx-auto texto-adultos"
+                    style="font-weight: 300;"
+                >
+                    Apreciamos tu comprensión, esta celebración está pensada
+                    para compartir entre adultos
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 🎨 ESTILOS PERSONALIZADOS                                   -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<style>
+    .font-crimson {
+        font-family: "Crimson Text", serif;
+    }
+
+    /* Partículas flotantes verdes */
+    .particula-verde {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, #8d9072 0%, transparent 70%);
+        border-radius: 50%;
+        animation: flotar 6s ease-in-out infinite;
+        opacity: 0.4;
+    }
+
+    @keyframes flotar {
+        0%,
+        100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.2;
+        }
+        50% {
+            transform: translateY(-30px) translateX(15px);
+            opacity: 0.6;
+        }
+    }
+
+    /* Animación de pulso lento */
+    @keyframes pulse-slow {
+        0%,
+        100% {
+            opacity: 0.4;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.6;
+            transform: scale(1.05);
+        }
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 4s ease-in-out infinite;
+    }
+
+    /* Animación suave del icono */
+    .adultos-icon-container:hover img {
+        animation: bounce-gentle 0.6s ease;
+    }
+
+    @keyframes bounce-gentle {
+        0%,
+        100% {
+            transform: translateY(0) scale(1);
+        }
+        50% {
+            transform: translateY(-8px) scale(1.05);
+        }
+    }
+
+    /* Filtro que convierte imágenes PNG negras al color verde oliva #8d9072 */
+    .verde-filter {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 2px 8px rgba(141, 144, 114, 0.2));
+        transition: all 0.3s ease;
+    }
+
+    .adultos-icon-container:hover .verde-filter {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 4px 12px rgba(141, 144, 114, 0.3));
+    }
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 🎬 ANIMACIONES CON GSAP                                      -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initAdultos = () => {
+        console.log("🍾 Iniciando sección Solo Adultos...");
+
+        // ═══ ESTADO INICIAL ═══
+        gsap.set("#contenedor-adultos", {
+            opacity: 0,
+            y: 50,
+            scale: 0.95,
+        });
+
+        gsap.set("#tarjeta-adultos .icono-adultos", { opacity: 0, scale: 0.8 });
+        gsap.set("#tarjeta-adultos .titulo-adultos", { opacity: 0, y: 20 });
+        gsap.set("#tarjeta-adultos .punto-adultos", { opacity: 0 });
+        gsap.set("#tarjeta-adultos .texto-adultos", { opacity: 0, y: 20 });
+
+        // ═══ ANIMACIÓN PRINCIPAL ═══
+        ScrollTrigger.create({
+            trigger: "#seccion-adultos",
+            start: "top 75%",
+            end: "bottom 25%",
+
+            onEnter: () => {
+                console.log("🍾 Entrando a la sección Solo Adultos");
+
+                // Card aparece
+                gsap.to("#contenedor-adultos", {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                });
+
+                // Elementos internos con delays sutiles
+                gsap.to("#tarjeta-adultos .icono-adultos", {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.1,
+                });
+
+                gsap.to("#tarjeta-adultos .titulo-adultos", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.15,
+                });
+
+                gsap.to("#tarjeta-adultos .punto-adultos", {
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.2,
+                });
+
+                gsap.to("#tarjeta-adultos .texto-adultos", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.25,
+                });
+            },
+
+            onLeaveBack: () => {
+                console.log("🍾 Saliendo de la sección Solo Adultos");
+
+                // Animación de salida rápida y simultánea
+                gsap.to("#contenedor-adultos", {
+                    opacity: 0,
+                    y: 50,
+                    scale: 0.95,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+
+                gsap.to("#tarjeta-adultos .icono-adultos", {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+
+                gsap.to("#tarjeta-adultos .titulo-adultos", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+
+                gsap.to("#tarjeta-adultos .punto-adultos", {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+
+                gsap.to("#tarjeta-adultos .texto-adultos", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                    ease: "power2.in",
+                });
+            },
+        });
+
+        console.log("🍾✨ Sección Solo Adultos activada!");
+    };
+
+    // Ejecutar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initAdultos);
+    } else {
+        initAdultos();
+    }
+
+    // También ejecutar en Astro page load
+    document.addEventListener("astro:page-load", initAdultos);
+</script>
