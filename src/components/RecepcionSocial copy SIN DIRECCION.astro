@@ -17,7 +17,7 @@
 
         <!-- Título -->
         <h3
-            class="font-crimson text-xl md:text-2xl uppercase mb-4 titulo-recepcion opacity-0"
+            class="font-crimson text-xl md:text-2xl uppercase tracking-widest mb-4 titulo-recepcion opacity-0"
             style="color: #8d9072; font-weight: 300; "
         >
             Recepción Social
@@ -25,18 +25,10 @@
 
         <!-- Nombre del lugar -->
         <p
-            class="font-crimson text-lg md:text-base mb-2 lugar-nombre opacity-0 font-bold"
-            style="color: #8d9072;"
+            class="font-crimson text-lg md:text-base mb-2 lugar-nombre opacity-0"
+            style="color: #8d9072; font-weight: 400;"
         >
             Residencia Familia Hoyos
-        </p>
-
-        <!-- Dirección -->
-        <p
-            class="font-crimson text-lg md:text-sm mb-4 direccion-recepcion opacity-0"
-            style="color: #8d9072; font-weight: 300;"
-        >
-            Valle de la Concepción, Calle Bolívar
         </p>
 
         <!-- Hora -->
@@ -44,7 +36,7 @@
             class="font-crimson text-lg md:text-lg mb-6 hora-recepcion opacity-0"
             style="color: #8d9072; font-weight: 300;"
         >
-            14:30 Hrs
+            14:30 HRS
         </p>
 
         <!-- Botón de ubicación estilo portada -->
@@ -113,10 +105,6 @@
                 opacity: 0,
                 y: 20,
             });
-            gsap.set("#contenedor-recepcion .direccion-recepcion", {
-                opacity: 0,
-                y: 20,
-            });
             gsap.set("#contenedor-recepcion .hora-recepcion", {
                 opacity: 0,
                 y: 20,
@@ -159,7 +147,7 @@
                         delay: 0.15,
                     });
 
-                    gsap.to("#contenedor-recepcion .direccion-recepcion", {
+                    gsap.to("#contenedor-recepcion .hora-recepcion", {
                         opacity: 1,
                         y: 0,
                         duration: 1,
@@ -167,20 +155,12 @@
                         delay: 0.2,
                     });
 
-                    gsap.to("#contenedor-recepcion .hora-recepcion", {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1,
-                        ease: "power3.out",
-                        delay: 0.25,
-                    });
-
                     gsap.to("#contenedor-recepcion .boton-ubicacion", {
                         opacity: 1,
                         y: 0,
                         duration: 1,
                         ease: "power3.out",
-                        delay: 0.3,
+                        delay: 0.25,
                     });
                 },
 
@@ -201,12 +181,6 @@
                         ease: "power2.in",
                     });
                     gsap.to("#contenedor-recepcion .lugar-nombre", {
-                        opacity: 0,
-                        y: 20,
-                        duration: 0.4,
-                        ease: "power2.in",
-                    });
-                    gsap.to("#contenedor-recepcion .direccion-recepcion", {
                         opacity: 0,
                         y: 20,
                         duration: 0.4,
