@@ -1,0 +1,514 @@
+---
+// Itinerario.astro - Versión elegante sin corazones
+---
+
+<section class="px-4 relative overflow-hidden py-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div class="max-w-3xl mx-auto relative">
+            <!-- Título -->
+            <div class="text-center mb-12 titulo-itinerario opacity-0">
+                <h2
+                    class="font-crimson text-2xl md:text-3xl lg:text-4xl uppercase tracking-wider mb-3"
+                    style="color: #8d9072; font-weight: 300;"
+                >
+                    Itinerario
+                </h2>
+                <div class="flex items-center justify-center gap-3">
+                    <div
+                        class="w-16 h-[1px] bg-gradient-to-r from-transparent to-[#8d9072]"
+                    >
+                    </div>
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#8d9072]"></div>
+                    <div
+                        class="w-16 h-[1px] bg-gradient-to-l from-transparent to-[#8d9072]"
+                    >
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative px-4 md:px-8">
+                <!-- Línea central delgada y elegante -->
+                <div
+                    class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#8d9072] to-transparent linea-central opacity-0"
+                    style="box-shadow: 0 0 8px rgba(141, 144, 114, 0.2);"
+                >
+                </div>
+
+                <div class="space-y-8" id="eventos-container">
+                    <!-- Evento 1: Iglesia -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-izq"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/iglesia.png"
+                                    alt="Icono de Iglesia"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-der"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Iglesia
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                11:30 H
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Evento 2: Recepción -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-izq"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Recepción
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                14:00 H
+                            </p>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-der"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/recepcion.png"
+                                    alt="Icono de Recepción"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evento 3: Entrada de los novios -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-izq"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/esposo-y-esposa.png"
+                                    alt="Icono de Novios"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-der"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Entrada de los novios
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                14:15 H
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Evento 4: Baile de los novios -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-izq"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Baile de los novios
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                14:30 H
+                            </p>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-der"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/vals2.png"
+                                    alt="Icono de Baile"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evento 5: Almuerzo -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-izq"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/cena.png"
+                                    alt="Icono de Almuerzo"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-der"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Almuerzo
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                15:00 H
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Evento 6: Torta -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-izq"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Torta
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                17:00 H
+                            </p>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-der"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/torta.png"
+                                    alt="Icono de Torta"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evento 7: Ramo -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-izq"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/ramo.png"
+                                    alt="Icono de Ramo"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-der"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Ramo
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                18:00 H
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Evento 8: Liga -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-izq"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Liga
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                19:00 H
+                            </p>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-der"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/liga.png"
+                                    alt="Icono de Liga"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evento 9: Hora loca -->
+                    <div
+                        class="evento-item grid grid-cols-2 gap-4 md:gap-8 opacity-0"
+                    >
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 imagen-izq"
+                        >
+                            <div
+                                class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 transform transition-all duration-300 hover:scale-110"
+                            >
+                                <img
+                                    src="/iconos/musica.png"
+                                    alt="Icono de Hora loca"
+                                    class="w-full h-full object-contain filter-color"
+                                />
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center px-2 md:px-4 text-center texto-der"
+                        >
+                            <p
+                                class="font-crimson text-base md:text-lg lg:text-xl uppercase tracking-wide leading-tight mb-1"
+                                style="color: #8d9072; font-weight: 300;"
+                            >
+                                Hora loca
+                            </p>
+                            <p
+                                class="font-crimson text-sm md:text-base lg:text-lg"
+                                style="color: #8d9072;"
+                            >
+                                20:00 H
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .font-crimson {
+        font-family: "Crimson Text", serif;
+    }
+
+    .evento-item p {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .evento-item:hover p:first-of-type {
+        transform: scale(1.05);
+        text-shadow: 0 2px 6px rgba(141, 144, 114, 0.15);
+    }
+
+    .filter-color {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 2px 6px rgba(141, 144, 114, 0.15));
+        transition:
+            filter 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .filter-color:hover {
+        filter: brightness(0) saturate(100%) invert(62%) sepia(9%)
+            saturate(936%) hue-rotate(37deg) brightness(94%) contrast(88%)
+            drop-shadow(0 4px 10px rgba(141, 144, 114, 0.25));
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initItinerario = () => {
+        console.log("📋 Iniciando animaciones del itinerario elegante...");
+
+        // 🎯 ESTADO INICIAL
+        gsap.set(".titulo-itinerario", { opacity: 0, y: -30 });
+        gsap.set(".linea-central", { opacity: 0, scaleY: 0 });
+        gsap.set(".evento-item", { opacity: 0 });
+        gsap.set(".imagen-izq", { x: -50, opacity: 0 });
+        gsap.set(".texto-izq", { x: -50, opacity: 0 });
+        gsap.set(".imagen-der", { x: 50, opacity: 0 });
+        gsap.set(".texto-der", { x: 50, opacity: 0 });
+
+        // ✨ ANIMACIÓN DEL TÍTULO
+        ScrollTrigger.create({
+            trigger: ".titulo-itinerario",
+            start: "top 85%",
+            once: true,
+            onEnter: () => {
+                gsap.to(".titulo-itinerario", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                });
+            },
+        });
+
+        // ✨ ANIMACIÓN DE LA LÍNEA CENTRAL
+        ScrollTrigger.create({
+            trigger: "#eventos-container",
+            start: "top 80%",
+            end: "top 20%",
+            onEnter: () => {
+                gsap.to(".linea-central", {
+                    opacity: 1,
+                    scaleY: 1,
+                    duration: 1.8,
+                    ease: "power2.out",
+                    transformOrigin: "top center",
+                });
+            },
+            onLeaveBack: () => {
+                gsap.to(".linea-central", {
+                    opacity: 0,
+                    scaleY: 0,
+                    duration: 0.5,
+                    ease: "power2.in",
+                    transformOrigin: "top center",
+                });
+            },
+        });
+
+        // ✨ ANIMACIÓN DE EVENTOS (uno por uno)
+        const eventos = document.querySelectorAll(".evento-item");
+        eventos.forEach((evento, index) => {
+            ScrollTrigger.create({
+                trigger: evento,
+                start: "top 85%",
+                onEnter: () => {
+                    const tl = gsap.timeline();
+
+                    tl.to(evento, {
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    }).to(
+                        evento.querySelectorAll(
+                            ".imagen-izq, .texto-izq, .imagen-der, .texto-der",
+                        ),
+                        {
+                            x: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            stagger: 0.1,
+                        },
+                        0.2,
+                    );
+                },
+                onLeaveBack: () => {
+                    const tl = gsap.timeline();
+
+                    tl.to(
+                        evento.querySelectorAll(".imagen-izq, .texto-izq"),
+                        {
+                            x: -50,
+                            opacity: 0,
+                            duration: 0.4,
+                            ease: "power2.in",
+                        },
+                        0,
+                    )
+                        .to(
+                            evento.querySelectorAll(".imagen-der, .texto-der"),
+                            {
+                                x: 50,
+                                opacity: 0,
+                                duration: 0.4,
+                                ease: "power2.in",
+                            },
+                            0,
+                        )
+                        .to(
+                            evento,
+                            {
+                                opacity: 0,
+                                duration: 0.3,
+                                ease: "power2.in",
+                            },
+                            0.2,
+                        );
+                },
+            });
+        });
+
+        console.log("📋✨ Animaciones del itinerario activadas!");
+    };
+
+    document.addEventListener("DOMContentLoaded", initItinerario);
+    document.addEventListener("astro:page-load", initItinerario);
+</script>
